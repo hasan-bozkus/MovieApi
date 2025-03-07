@@ -21,18 +21,15 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
         public async Task Handle(UpdateMovieCommand command)
         {
             var result = await _movieContext.Movies.FindAsync(command.MovieId);
-            var movie = new Movie
-            {
-                CoverImageUrl = result.CoverImageUrl,
-                CreatedYear = result.CreatedYear,
-                Description = result.Description,
-                Rating = result.Rating,
-                Status = result.Status,
-                Title = result.Title,
-                Duration = result.Duration,
-                ReleaseDate = result.ReleaseDate
-            };
-            _movieContext.Movies.Update(movie);
+            result.CoverImageUrl = command.CoverImageUrl;
+            result.CreatedYear = command.CreatedYear;
+            result.Description = command.Description;
+            result.Rating = command.Rating;
+            result.Status = command.Status;
+            result.Title = command.Title;
+            result.Duration = command.Duration;
+            result.ReleaseDate = command.ReleaseDate;
+            _movieContext.Movies.Update(result);
             await _movieContext.SaveChangesAsync();
         }
     }

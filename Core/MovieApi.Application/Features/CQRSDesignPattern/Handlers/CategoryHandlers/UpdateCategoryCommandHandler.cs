@@ -21,11 +21,8 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.CategoryHandl
         public async Task Handle(UpdateCategoryCommand command)
         {
             var values = await _movieContext.Categories.FindAsync(command.CategoryId);
-            var category = new Category
-            {
-                CategoryName = values.CategoryName
-            };
-            _movieContext.Categories.Update(category);
+            values.CategoryName = command.CategoryName;
+            _movieContext.Categories.Update(values);
             await _movieContext.SaveChangesAsync();
         }
     }
