@@ -1,7 +1,7 @@
-﻿
+﻿@model List<MovieApi.Dto.Dtos.MovieDtos.ResultMovieDto>
 @{
-    ViewData["Title"] = "MovieList";
-    Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
+	ViewData["Title"] = "MovieList";
+	Layout = "~/Views/UserWebUILayout/LayoutUI.cshtml";
 }
 
 <div class="page-single movie_list">
@@ -22,61 +22,21 @@
 					<a href="~/Film-Review-Movie-Database/movielist.html" class="list"><i class="ion-ios-list-outline active"></i></a>
 					<a href="~/Film-Review-Movie-Database/moviegrid.html" class="grid"><i class="ion-grid"></i></a>
 				</div>
-				<div class="movie-item-style-2">
-					<img src="~/Film-Review-Movie-Database/images/uploads/mv1.jpg" alt="">
-					<div class="mv-item-infor">
-						<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">oblivion <span>(2012)</span></a></h6>
-						<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
-						<p class="describe">Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...</p>
-						<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-						<p>Director: <a href="~/Film-Review-Movie-Database/#">Joss Whedon</a></p>
-						<p>Stars: <a href="~/Film-Review-Movie-Database/#">Robert Downey Jr.,</a> <a href="~/Film-Review-Movie-Database/#">Chris Evans,</a> <a href="~/Film-Review-Movie-Database/#">  Chris Hemsworth</a></p>
+				@foreach(var item in Model)
+				{
+					<div class="movie-item-style-2">
+						<img src="@item.CoverImageUrl" alt="">
+						<div class="mv-item-infor">
+							<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">@item.Title <span>(@item.CreatedYear)</span></a></h6>
+							<p class="rate"><i class="ion-android-star"></i><span>@item.Rating</span> /10</p>
+							<p class="describe">@item.Description...</p>
+							<p class="run-time"> Süre:@item.Duration Dk’    .     <span>MMPA: PG-13 </span>    .     <span>Çıkış Tarihi: @item.ReleaseDate</span></p>
+							<p>Director: <a href="~/Film-Review-Movie-Database/#">Joss Whedon</a></p>
+							<p>Stars: <a href="~/Film-Review-Movie-Database/#">Robert Downey Jr.,</a> <a href="~/Film-Review-Movie-Database/#">Chris Evans,</a> <a href="~/Film-Review-Movie-Database/#">  Chris Hemsworth</a></p>
+						</div>
 					</div>
-				</div>
-				<div class="movie-item-style-2">
-					<img src="~/Film-Review-Movie-Database/images/uploads/mv2.jpg" alt="">
-					<div class="mv-item-infor">
-						<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">into the wild <span>(2014)</span></a></h6>
-						<p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
-						<p class="describe">As Steve Rogers struggles to embrace his role in the modern world, he teams up with a fellow Avenger and S.H.I.E.L.D agent, Black Widow, to battle a new threat...</p>
-						<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-						<p>Director: <a href="~/Film-Review-Movie-Database/#">Anthony Russo,</a><a href="~/Film-Review-Movie-Database/#">Joe Russo</a></p>
-						<p>Stars: <a href="~/Film-Review-Movie-Database/#">Chris Evans,</a> <a href="~/Film-Review-Movie-Database/#">Samuel L. Jackson,</a> <a href="~/Film-Review-Movie-Database/#">  Scarlett Johansson</a></p>
-					</div>
-				</div>
-				<div class="movie-item-style-2">
-					<img src="~/Film-Review-Movie-Database/images/uploads/mv3.jpg" alt="">
-					<div class="mv-item-infor">
-						<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">blade runner  <span>(2015)</span></a></h6>
-						<p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
-						<p class="describe">Armed with a super-suit with the astonishing ability to shrink in scale but increase in strength, cat burglar Scott Lang must embrace his inner hero and help...</p>
-						<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-						<p>Director: <a href="~/Film-Review-Movie-Database/#">Peyton Reed</a></p>
-						<p>Stars: <a href="~/Film-Review-Movie-Database/#">Paul Rudd,</a> <a href="~/Film-Review-Movie-Database/#"> Michael Douglas</a></p>
-					</div>
-				</div>
-				<div class="movie-item-style-2">
-					<img src="~/Film-Review-Movie-Database/images/uploads/mv4.jpg" alt="">
-					<div class="mv-item-infor">
-						<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">Mulholland pride<span> (2013)  </span></a></h6>
-						<p class="rate"><i class="ion-android-star"></i><span>7.2</span> /10</p>
-						<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-						<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-						<p>Director: <a href="~/Film-Review-Movie-Database/#">Shane Black</a></p>
-						<p>Stars: <a href="~/Film-Review-Movie-Database/#">Robert Downey Jr., </a> <a href="~/Film-Review-Movie-Database/#">  Guy Pearce,</a><a href="~/Film-Review-Movie-Database/#">Don Cheadle</a></p>
-					</div>
-				</div>
-				<div class="movie-item-style-2">
-					<img src="~/Film-Review-Movie-Database/images/uploads/mv5.jpg" alt="">
-					<div class="mv-item-infor">
-						<h6><a href="~/Film-Review-Movie-Database/moviesingle.html">skyfall: evil of boss<span> (2013)  </span></a></h6>
-						<p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
-						<p class="describe">When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.</p>
-						<p class="run-time"> Run Time: 2h21’    .     <span>MMPA: PG-13 </span>    .     <span>Release: 1 May 2015</span></p>
-						<p>Director: <a href="~/Film-Review-Movie-Database/#">Alan Taylor</a></p>
-						<p>Stars: <a href="~/Film-Review-Movie-Database/#">Chris Hemsworth,  </a> <a href="~/Film-Review-Movie-Database/#">  Natalie Portman,</a><a href="~/Film-Review-Movie-Database/#">Tom Hiddleston</a></p>
-					</div>
-				</div>
+				}
+				
 				<div class="topbar-filter">
 					<label>Her Sayfadaki Film Sayısı:</label>
 					<select>
