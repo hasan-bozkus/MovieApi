@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieApi.Application.Features.CQRSDesginPattern.Command.MovieCommnands
+namespace MovieApi.Dto.Dtos.AdminMovieDtos
 {
-    public class CreateMovieCommand
+    public class CreateAdminMovieDto
     {
         public string Title { get; set; }
         public string CoverImageUrl { get; set; }
