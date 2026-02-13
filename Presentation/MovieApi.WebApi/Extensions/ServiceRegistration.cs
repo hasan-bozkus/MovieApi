@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CategoryHandlers;
+﻿using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CategoryHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.SeriesHandlers;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.UserRegisterHandlers;
-using MovieApi.Application.Features.MediatorDesignPattern.Handlers.CastHandlers;
-using MovieApi.Application.Features.MediatorDesignPattern.Handlers.TagHandlers;
 using MovieApi.Persistence.Context;
-using MovieApi.Persistence.Identity;
 
 namespace MovieApi.WebApi.Extensions
 {
@@ -34,15 +30,6 @@ namespace MovieApi.WebApi.Extensions
 
             // Add services to the container.
             services.AddScoped<CreateUserRegisterCommandHandler>();
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MovieContext>()
-                .AddDefaultTokenProviders();
-
-            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
-            services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssembly(typeof(GetTagQueryHandler).Assembly));
-            services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssembly(typeof(GetCastQueryHandler).Assembly));
 
             services.AddScoped<MovieContext>();
 

@@ -1,27 +1,14 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.CategoryHandlers;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.SeriesHandlers;
-using MovieApi.Application.Features.CQRSDesignPattern.Handlers.UserRegisterHandlers;
-using MovieApi.Application.Features.MediatorDesignPattern.Handlers.CastHandlers;
-using MovieApi.Application.Features.MediatorDesignPattern.Handlers.TagHandlers;
-using MovieApi.Persistence.Context;
-using MovieApi.Persistence.Identity;
 using MovieApi.WebApi.Extensions;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices()
+    .AddIdentityServices()
+    .AddMediatrServices()
+    .AddSwaggerServices();
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(x =>
-{
-    x.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieApi.WebApi", Version = "v1" });
-});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
