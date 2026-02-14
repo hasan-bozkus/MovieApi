@@ -1,10 +1,4 @@
-﻿@model List<AdminResultMovieDto>
-@{
-    ViewData["Title"] = "MovieList";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
-    int count = 0;
-}
-<div class="cinema-shell">
+﻿<div class="cinema-shell">
     <div class="cinema-topbar">
         <div class="d-flex align-items-start align-items-md-center justify-content-between gap-3 flex-column flex-md-row">
             <div>
@@ -38,7 +32,6 @@
                     <tr>
                         <th>#</th>
                         <th>Film</th>
-                        <th>Kategori</th>
                         <th>Reyting</th>
                         <th>Yıl</th>
                         <th>Durum</th>
@@ -54,7 +47,7 @@
                         // Status bool/int olabilir; güvenli yorumlayalım:
                         // - bool ise True/False
                         // - int ise 1 aktif, 0 pasif gibi
-                        var statusText = item.Status.ToString() ?? "";
+                        var statusText = item.MovieStatus.ToString() ?? "";
                         var isActive = statusText.Equals("True", StringComparison.OrdinalIgnoreCase)
                         || statusText == "1";
 
@@ -63,20 +56,24 @@
 
                             <td>
                                 <div class="movie-title">
-                                    @item.Title
+                                    <span class="clap">
+                                        <ion-icon name="film-outline"></ion-icon>
+                                    </span>
+                                    <div>
+                                        <div>@item.MovieTitle</div>
+                                        <div class="muted">Katalog kaydı</div>
+                                    </div>
                                 </div>
                             </td>
-
-                            <td> Kategori Adı</td>
 
                             <td>
                                 <span class="rating-badge">
                                     <ion-icon name="star"></ion-icon>
-                                    @item.Rating
+                                    @item.MovieRating
                                 </span>
                             </td>
 
-                            <td class="muted">@item.CreatedYear</td>
+                            <td class="muted">@item.MovileCreatedYear</td>
 
                             <td>
                                 <span class="pill @(isActive ? "on" : "off")">
@@ -104,4 +101,3 @@
         </div>
     </div>
 </div>
-
