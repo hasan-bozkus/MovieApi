@@ -1,9 +1,10 @@
 ﻿@model List<AdminResultMovieDto>
 @{
-    ViewData["Title"] = "MovieList";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
+    ViewData["Title"] = "Film Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
     int count = 0;
 }
+
 <style>
     .category-badge {
         padding: 6px 14px;
@@ -95,12 +96,12 @@
 
                         // Kategori adını normalize et (Türkçe karakterleri küçült)
                         var categoryNormalized = item.CategoryName?.ToLowerInvariant()
-                        .Replace("ü", "u")
-                        .Replace("ğ", "g")
-                        .Replace("ş", "s")
-                        .Replace("ç", "c")
-                        .Replace("ö", "o")
-                        .Replace("ı", "i") ?? "";
+                            .Replace("ü", "u")
+                            .Replace("ğ", "g")
+                            .Replace("ş", "s")
+                            .Replace("ç", "c")
+                            .Replace("ö", "o")
+                            .Replace("ı", "i") ?? "";
 
                         // İkon seçimi
                         string iconName = categoryNormalized switch
@@ -174,4 +175,3 @@
         </div>
     </div>
 </div>
-

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MovieApi.Application.Features.CQRSDesginPattern.Command.MovieCommnands;
 using MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers;
 using MovieApi.Application.Features.CQRSDesginPattern.Queries.MovieQueries;
+using MovieApi.Application.Features.CQRSDesignPattern.Results.MovieResults;
 
 namespace MovieApi.WebApi.Controllers
 {
@@ -12,17 +13,19 @@ namespace MovieApi.WebApi.Controllers
     {
         private readonly GetMovieByIdQueryHandler _getMovieByIdQueryHandler;
         private readonly GetMovieQueryHandler _getMovieQueryHandler;
+        private readonly GetMovieWithCategoryQueryHandler _getMovieWithCategoryQueryHandler;
         private readonly CreateMovieCommandHandler _createMovieCommandHandler;
         private readonly UpdateMovieCommandHandler _updateMovieCommandHandler;
         private readonly RemoveMovieCommandHandler _removeMovieCommandHandler;
 
-        public MoviesController(GetMovieByIdQueryHandler getMovieByIdQueryHandler, GetMovieQueryHandler getMovieQueryHandler, CreateMovieCommandHandler createMovieCommandHandler, UpdateMovieCommandHandler updateMovieCommandHandler, RemoveMovieCommandHandler removeMovieCommandHandler)
+        public MoviesController(GetMovieByIdQueryHandler getMovieByIdQueryHandler, GetMovieQueryHandler getMovieQueryHandler, CreateMovieCommandHandler createMovieCommandHandler, UpdateMovieCommandHandler updateMovieCommandHandler, RemoveMovieCommandHandler removeMovieCommandHandler, GetMovieWithCategoryQueryHandler getMovieWithCategoryQueryHandler)
         {
             _getMovieByIdQueryHandler = getMovieByIdQueryHandler;
             _getMovieQueryHandler = getMovieQueryHandler;
             _createMovieCommandHandler = createMovieCommandHandler;
             _updateMovieCommandHandler = updateMovieCommandHandler;
             _removeMovieCommandHandler = removeMovieCommandHandler;
+            _getMovieWithCategoryQueryHandler = getMovieWithCategoryQueryHandler;
         }
 
         [HttpGet]
@@ -58,6 +61,13 @@ namespace MovieApi.WebApi.Controllers
         {
             await _updateMovieCommandHandler.Handle(command);
             return Ok("Film güncelleme işlemi başarılı.");
+        }
+
+        [HttpGet("GetMovieWithCategory")]
+        public async Task<IActionResult> GetMovieWithCategory()
+        {
+            var value = await _getMovieWithCategoryQueryHandler.Handle();
+            return Ok(value);
         }
     }
 }
