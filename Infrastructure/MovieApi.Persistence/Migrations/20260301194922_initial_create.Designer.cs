@@ -12,8 +12,8 @@ using MovieApi.Persistence.Context;
 namespace MovieApi.Persistence.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20250613190112_mig4")]
-    partial class mig4
+    [Migration("20260301194922_initial_create")]
+    partial class initial_create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,6 +205,12 @@ namespace MovieApi.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
@@ -217,6 +223,9 @@ namespace MovieApi.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieId"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CoverImageUrl")
                         .IsRequired()
@@ -239,14 +248,17 @@ namespace MovieApi.Persistence.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MovieId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Movies");
                 });
@@ -275,6 +287,58 @@ namespace MovieApi.Persistence.Migrations
                     b.HasKey("ReviewId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entities.Series", b =>
+                {
+                    b.Property<int>("SeriesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SeriesId"));
+
+                    b.Property<int?>("AverageEpisodeDuration")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EpisodeCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FirstAirDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SeasonCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SeriesId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Serieses");
                 });
 
             modelBuilder.Entity("MovieApi.Domain.Entities.Tag", b =>
@@ -419,6 +483,35 @@ namespace MovieApi.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entities.Movie", b =>
+                {
+                    b.HasOne("MovieApi.Domain.Entities.Category", "Category")
+                        .WithMany("Movies")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entities.Series", b =>
+                {
+                    b.HasOne("MovieApi.Domain.Entities.Category", "Category")
+                        .WithMany("Serieses")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Movies");
+
+                    b.Navigation("Serieses");
                 });
 #pragma warning restore 612, 618
         }
