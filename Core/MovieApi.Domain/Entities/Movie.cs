@@ -19,5 +19,7 @@ namespace MovieApi.Domain.Entities
         public string Status { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

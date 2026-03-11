@@ -12,6 +12,18 @@ namespace MovieApi.Persistence.Context
             optionsBuilder.UseSqlServer("Server=DESKTOP-PDF8JNK\\SQLEXPRESS; initial Catalog=ApiMovieDb; integrated Security=true; TrustServerCertificate=true");
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Review>()
+                .HasOne<AppUser>()
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        }
+
             public DbSet<Category> Categories { get; set; }  
             public DbSet<Movie> Movies { get; set; }  
             public DbSet<Review> Reviews { get; set; }  
