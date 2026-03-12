@@ -1,10 +1,11 @@
-﻿@model CreateAdminMovieDto
+﻿@model MovieApi.UI.Dtos.MovieDtos.CreateAdminMovieDto
+@using Microsoft.AspNetCore.Mvc.Rendering
+
 @{
-    ViewData["Title"] = "CreateMovie";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
+    ViewData["Title"] = "Yeni Film Ekle";
 }
 
-@@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600&display=swap');
 
 <style>
     :root {
@@ -51,7 +52,7 @@
         animation: fadeDown 0.5s ease both;
     }
 
-    @@keyframes fadeDown {
+    @keyframes fadeDown {
         from { opacity: 0; transform: translateY(-16px); }
         to   { opacity: 1; transform: translateY(0); }
     }
@@ -149,7 +150,7 @@
         animation: fadeUp 0.5s ease both;
     }
 
-    @@keyframes fadeUp {
+    @keyframes fadeUp {
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0); }
     }
@@ -505,7 +506,7 @@
     <div class="create-header">
         <div>
             <div class="breadcrumb">
-                <a href="/Admin/AdminMovie/MovieList">Filmler</a>
+                <a href="/Admin/AdminMovie">Filmler</a>
                 <span>›</span>
                 <span>Yeni Film</span>
             </div>
@@ -513,13 +514,13 @@
             <p class="page-subtitle">Kataloğa yeni bir yapım ekleyin</p>
         </div>
         <div class="header-actions">
-            <a href="/Admin/AdminMovie/MovieList" class="btn btn-ghost">
+            <a href="/Admin/AdminMovie" class="btn btn-ghost">
                 ← Geri Dön
             </a>
         </div>
     </div>
 
-    <form method="post">
+    <form asp-action="CreateMovie" method="post">
 
         <div class="form-layout">
 
@@ -571,7 +572,7 @@
 
                         <div class="field-group">
                             <label asp-for="CategoryId">Kategori <span class="required">*</span></label>
-                            <select asp-for="CategoryId" asp-items="ViewBag.categories">
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories">
                                 <option value="">— Kategori Seçin —</option>
                             </select>
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
@@ -706,8 +707,8 @@
         <div class="form-bottom-bar">
             <div class="form-note">Tüm zorunlu alanları doldurun</div>
             <div class="bottom-actions">
-                <a href="/Admin/AdminMovie/MovieList" class="btn btn-ghost">İptal</a>
-                <button class="btn btn-primary">
+                <a href="/Admin/AdminMovie" class="btn btn-ghost">İptal</a>
+                <button type="submit" class="btn btn-primary">
                     ✦ Filmi Ekle
                 </button>
             </div>

@@ -1,0 +1,11 @@
+﻿﻿<!-- Default Dark Mode -->
+<script>
+    $(document).ready(function () {
+        // Dark theme radio'yu seç
+        $("#DarkTheme").prop("checked", true).trigger("change");
+
+        // Eğer change event çalışmazsa direkt class ekle
+        $("html").addClass("dark-theme");
+        $(".dark-mode-icon ion-icon").attr("name", "sunny-outline");
+    });
+</script>

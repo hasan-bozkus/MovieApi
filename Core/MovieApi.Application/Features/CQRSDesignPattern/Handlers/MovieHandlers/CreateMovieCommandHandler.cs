@@ -29,7 +29,8 @@ namespace MovieApi.Application.Features.CQRSDesignPattern.Handlers.MovieHandlers
                 Status = command.Status,
                 Title = command.Title,
                 Duration = command.Duration,
-                ReleaseDate = command.ReleaseDate
+                ReleaseDate = command.ReleaseDate,
+                CategoryId = command.CategoryId
             };
             await _movieContext.Movies.AddAsync(movie);
             await _movieContext.SaveChangesAsync();
